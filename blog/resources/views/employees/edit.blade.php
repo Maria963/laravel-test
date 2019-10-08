@@ -49,29 +49,26 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
-             <div class="form-group">
-                            <label for="room">Company name</label>
-                            <select class="form-control" name="company" >
-                                @foreach ($companies as $company)
-                                @if ($employee->company==$company->id)
-                                    <option value="{{$company->id}}" selected="selected">{{ $company->name }}</option>
-                                    @else 
-                                    <option value="{{$company->id}}">{{ $company->name }}</option>
-                                @endif   
-                                @endforeach
-                            </select>
-                        </div>
+            <div class="form-group">
+                <label for="room">Company name</label>
+                <select class="form-control" name="company" >
+                @foreach ($companies as $company)
+                    @if ($employee->company==$company->id)
+                        <option value="{{$company->id}}" selected="selected">{{ $company->name }}</option>
+                    @else 
+                        <option value="{{$company->id}}">{{ $company->name }}</option>
+                    @endif   
+                    @endforeach
+                </select>
+            </div>
         </div>
 
-      
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Phone:</strong>
                 <input type="text" name="phone" value="{{$employee->phone}}s"  class="form-control" placeholder="Phone">
             </div>
         </div>
-
-
         
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
