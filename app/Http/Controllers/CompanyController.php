@@ -44,13 +44,13 @@ class CompanyController extends Controller
         if ($logo) {
             $newName = rand(). '.'. $logo->getClientOriginalExtension();
             $path = $logo->storeAs('public', $newName);
-            $companyInputs = array (
+            $companyForm = array (
                 'name' => $request->name,
                 'email' => $request->email,
                 'logo' => $newName,
                 'website' => $request->website
             );
-           Company::create($companyInputs);
+           Company::create($companyForm);
         } else {
            Company::create($request->all());
         }
@@ -83,13 +83,13 @@ class CompanyController extends Controller
         if ($logo) {
             $newName = rand(). '.'. $logo->getClientOriginalExtension();
             $path = $logo->storeAs('public', $newName);
-            $companyInputs =  array (
+            $companyForm =  array (
                 'name' => $request->name,
                 'email' => $request->email,
                 'logo' => $newName,
                 'website' => $request->website
             );
-           Company::update($companyInputs);
+           Company::update($companyForm);
         } else {
            Company::update($request->all());
         }
