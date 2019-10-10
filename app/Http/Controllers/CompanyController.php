@@ -44,13 +44,9 @@ class CompanyController extends Controller
         if ($logo) {
             $newName = rand(). '.'. $logo->getClientOriginalExtension();
             $path = $logo->storeAs('public', $newName);
-            $companyForm = array (
-                'name' => $request->name,
-                'email' => $request->email,
-                'logo' => $newName,
-                'website' => $request->website
-            );
-           Company::create($companyForm);
+            $companyForm = $request->only('name', 'email', 'website');
+            $companyForm['logo'] = $newName;
+            Company::create($companyForm);
         } else {
            Company::create($request->all());
         }
@@ -83,15 +79,11 @@ class CompanyController extends Controller
         if ($logo) {
             $newName = rand(). '.'. $logo->getClientOriginalExtension();
             $path = $logo->storeAs('public', $newName);
-            $companyForm =  array (
-                'name' => $request->name,
-                'email' => $request->email,
-                'logo' => $newName,
-                'website' => $request->website
-            );
-           Company::update($companyForm);
+            $companyForm = $request->only('name', 'email', 'website');
+            $companyForm['logo'] = $newName;
+            $company->update($companyForm);
         } else {
-           Company::update($request->all());
+            $company->update($request->all());
         }
         return redirect()->route('companies.index')->with('success','Company created successfully.');
     }
