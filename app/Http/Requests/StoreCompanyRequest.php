@@ -25,7 +25,7 @@ class StoreCompanyRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'logo' => 'dimensions:min_width=100,min_height=100'
+           // 'logo' => 'dimensions:min_width=100,min_height=100'
         ];
     }
 }

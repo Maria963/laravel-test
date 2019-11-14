@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
-
 class CompanyController extends Controller
 {
     public function __construct()
@@ -20,7 +18,6 @@ class CompanyController extends Controller
         $companies = Company::with('employees')->latest()->paginate(10);
         return view('companies.index', compact('companies'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +27,6 @@ class CompanyController extends Controller
     {
         return view('companies.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -52,7 +48,6 @@ class CompanyController extends Controller
         }
         return redirect()->route('companies.index')->with('success','Company created successfully.');
     }
-
     /**
      * Display the specified resource.
      *
@@ -64,7 +59,6 @@ class CompanyController extends Controller
     {
         return view('companies.edit', compact('company')); 
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -87,7 +81,6 @@ class CompanyController extends Controller
         }
         return redirect()->route('companies.index')->with('success','Company created successfully.');
     }
-
     /**
      * Remove the specified resource from storage.
      *
