@@ -22,7 +22,7 @@ class ApiController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid Email or Password',
-            ], 401);
+            ]);
         }
  
         return response()->json([
