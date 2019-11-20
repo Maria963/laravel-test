@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Company;
-use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\EmployeeRequest;
 
 
 class EmployeeController extends Controller
@@ -41,7 +41,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEmployeeRequest $request)
+    public function store(EmployeeRequest $request)
     {
         $validated = $request->validated();
         Employee::create($request->all());
@@ -68,7 +68,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreEmployeeRequest $request, Employee $employee)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
         $validated = $request->validated();
         $employee->update($request->all());

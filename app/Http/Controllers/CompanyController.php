@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Company;
-use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\CompanyRequest;
 class CompanyController extends Controller
 {
     public function __construct()
@@ -33,7 +33,7 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCompanyRequest $request)
+    public function store(CompanyRequest $request)
     {
         $validated = $request->validated();
         $logo = $request->file('logo');
@@ -66,7 +66,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCompanyRequest $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
         $validated = $request->validated();
         $logo = $request->file('logo');

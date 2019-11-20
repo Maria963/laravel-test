@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Employee;
 use App\Models\Company;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreEmployeeRequest;
-use \Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -17,18 +16,8 @@ class EmployeeController extends Controller
      */
     public function index(Employee $employee)
     {   
-       return response(Employee::all());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function show(Employee $employee)
-    {
-        return $employee;
+       $employees = Employee::all();
+       return response()->json($employees);
     }
 
     /**
@@ -37,14 +26,22 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEmployeeRequest $request)
+    public function store(EmployeeRequest $request)
     {
         $employee = Employee::create($request->all());
-        return response()->json('Employee added');
+        return response()->json( $employee, 201);
     }
 
+  /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Employee $employee)
+    {
+        return response()->json($employee);
+    }
 
-  
     /**
      * Update the specified resource in storage.
      *
@@ -52,10 +49,10 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreEmployeeRequest $request, Employee $employee)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
-        $employee->update($request->all());
-        return response()->json($employee, 200);
+        $employee-> update($request->all());
+        return response()->json('Employee updated');
     }
 
     /**

@@ -14,11 +14,9 @@ use Illuminate\Http\Request;
 */
 
 
-Route::post('login', 'ApiController@login');
+Route::post('login', 'Api\AuthController@login');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
-
-   Route::get('logout', 'ApiController@logout');
 
    Route::get('companies', 'Api\CompanyController@index');
    Route::get('companies/{company}', 'Api\CompanyController@show');
