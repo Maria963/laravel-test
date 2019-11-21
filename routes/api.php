@@ -30,6 +30,4 @@ Route::group(['middleware' => 'auth.jwt'], function () {
    Route::post('employees', 'Api\EmployeeController@store');
    Route::post('employees/{employee}', 'Api\EmployeeController@update');
    Route::delete('employees/{employee}', 'Api\EmployeeController@destroy');
-
-  
 });

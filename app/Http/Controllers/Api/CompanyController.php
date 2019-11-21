@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Models\Company;
 use App\Http\Controllers\Controller;
-//use Illuminate\Http\Request;
 use App\Http\Requests\CompanyRequest;
 
 class CompanyController extends Controller
@@ -13,12 +13,12 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Company $company)
+    public function index()
     {
         $companies = Company::all();
-       return response()->json($companies);
+        return response()->json($companies);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,21 +37,20 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
-           $logo = $request->file('logo');
-            if ($logo) {
-            $newName = rand(). '.'. $logo->getClientOriginalExtension();
+        $logo = $request->file('logo');
+        if ($logo) {
+            $newName = rand() . '.' . $logo->getClientOriginalExtension();
             $path = $logo->storeAs('public/logos', $newName);
 
             $companyForm = $request->only('name', 'email', 'website');
             $companyForm['logo'] = $newName;
-       
+
             $company = Company::create($companyForm);
-         
-           } else {
-           $company = Company::create($request->all());
+        } else {
+            $company = Company::create($request->all());
         }
-      
-      return response()->json( $company, 201);
+
+        return response()->json($company, 201);
     }
 
     /**
@@ -63,23 +62,22 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, $id)
     {
-   
-       $company =Company::findOrFail($id);
-       $logo = $request->file('logo');
-       if ($logo) {
-            $newName = rand(). '.'. $logo->getClientOriginalExtension();
+
+        $company = Company::findOrFail($id);
+        $logo = $request->file('logo');
+        if ($logo) {
+            $newName = rand() . '.' . $logo->getClientOriginalExtension();
             $path = $request->file('logo')->storeAs('public/logos', $newName);
             $companyForm = $request->only('name', 'email', 'website');
             $companyForm['logo'] = $newName;
-            $company -> update($companyForm);  
-         
-       } else {
-             $company->update($request->all());
+            $company->update($companyForm);
+        } else {
+            $company->update($request->all());
         }
-       
+
         return response()->json('Company updated');
     }
-       
+
     /**
      * Remove the specified resource from storage.
      *
@@ -90,6 +88,5 @@ class CompanyController extends Controller
     {
         $company->delete();
         return response()->json(null, 204);
-
     }
 }

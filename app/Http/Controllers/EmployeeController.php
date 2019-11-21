@@ -31,8 +31,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $companies = Company::all();  
-        return view('employees.create' , compact('companies'));
+        $companies = Company::all();
+        return view('employees.create', compact('companies'));
     }
 
     /**
@@ -45,7 +45,7 @@ class EmployeeController extends Controller
     {
         $validated = $request->validated();
         Employee::create($request->all());
-        return redirect('employees.index')->with('success' , 'Employee created!');
+        return redirect('employees.index')->with('success', 'Employee created!');
     }
 
     /**
@@ -54,11 +54,11 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    
+
     public function edit(Employee $employee)
     {
         $companies = Company::all();
-        return view('employees.edit', compact('employee' , 'companies'));
+        return view('employees.edit', compact('employee', 'companies'));
     }
 
     /**
@@ -84,6 +84,6 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return redirect()->route('employees.index')->with('success','Employee deleted successfully');
+        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully');
     }
 }

@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Company;
 use App\Http\Requests\CompanyRequest;
+
 class CompanyController extends Controller
 {
     public function __construct()
@@ -38,15 +41,15 @@ class CompanyController extends Controller
         $validated = $request->validated();
         $logo = $request->file('logo');
         if ($logo) {
-            $newName = rand(). '.'. $logo->getClientOriginalExtension();
+            $newName = rand() . '.' . $logo->getClientOriginalExtension();
             $path = $logo->storeAs('public', $newName);
             $companyForm = $request->only('name', 'email', 'website');
             $companyForm['logo'] = $newName;
             Company::create($companyForm);
         } else {
-           Company::create($request->all());
+            Company::create($request->all());
         }
-        return redirect()->route('companies.index')->with('success','Company created successfully.');
+        return redirect()->route('companies.index')->with('success', 'Company created successfully.');
     }
     /**
      * Display the specified resource.
@@ -54,10 +57,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-   
+
     public function edit(Company $company)
     {
-        return view('companies.edit', compact('company')); 
+        return view('companies.edit', compact('company'));
     }
     /**
      * Update the specified resource in storage.
@@ -71,7 +74,7 @@ class CompanyController extends Controller
         $validated = $request->validated();
         $logo = $request->file('logo');
         if ($logo) {
-            $newName = rand(). '.'. $logo->getClientOriginalExtension();
+            $newName = rand() . '.' . $logo->getClientOriginalExtension();
             $path = $logo->storeAs('public', $newName);
             $companyForm = $request->only('name', 'email', 'website');
             $companyForm['logo'] = $newName;
@@ -79,7 +82,7 @@ class CompanyController extends Controller
         } else {
             $company->update($request->all());
         }
-        return redirect()->route('companies.index')->with('success','Company created successfully.');
+        return redirect()->route('companies.index')->with('success', 'Company created successfully.');
     }
     /**
      * Remove the specified resource from storage.
@@ -90,6 +93,6 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect()->route('companies.index')->with('success','Company deleted successfully');
+        return redirect()->route('companies.index')->with('success', 'Company deleted successfully');
     }
 }

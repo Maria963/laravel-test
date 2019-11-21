@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Models\Employee;
-use App\Models\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeRequest;
 
@@ -14,10 +14,10 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Employee $employee)
-    {   
-       $employees = Employee::all();
-       return response()->json($employees);
+    public function index()
+    {
+        $employees = Employee::all();
+        return response()->json($employees);
     }
 
     /**
@@ -29,10 +29,10 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request)
     {
         $employee = Employee::create($request->all());
-        return response()->json( $employee, 201);
+        return response()->json($employee, 201);
     }
 
-  /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -51,7 +51,7 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeRequest $request, Employee $employee)
     {
-        $employee-> update($request->all());
+        $employee->update($request->all());
         return response()->json('Employee updated');
     }
 
@@ -67,4 +67,3 @@ class EmployeeController extends Controller
         return response()->json(null, 204);
     }
 }
-
